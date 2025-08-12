@@ -14,6 +14,7 @@ class InventoryInOutPlugin(UrlsMixin, NavigationMixin, InvenTreePlugin):
     VERSION = "0.3.0"
     WEBSITE = "https://grischamedia.ch"
     LICENSE = "MIT"
+    PUBLIC = True
 
     NAVIGATION = [
         {
