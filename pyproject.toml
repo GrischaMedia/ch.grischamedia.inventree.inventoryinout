@@ -31,3 +31,6 @@ include-package-data = true
 ]
 [project.entry-points."inventree.plugins"]
 inventoryinout = "inventree_inventoryinout.plugin:InventoryInOutPlugin"
+
+[project.entry-points.inventree_plugins]
+inventoryinout = "inventree_inventoryinout.plugin:InventoryInOutPlugin"

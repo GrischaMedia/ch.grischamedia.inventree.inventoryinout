@@ -11,7 +11,7 @@ class InventoryInOutPlugin(UrlsMixin, NavigationMixin, InvenTreePlugin):
     DESCRIPTION = _("Schnelles Massen-Buchen von Beständen per IPN-Scan (IN/OUT).")
     AUTHOR = "GrischaMedia"
     PUBLISH_DATE = "2025-08-12"
-    VERSION = "0.3.0"
+    VERSION = "0.3.1"
     WEBSITE = "https://grischamedia.ch"
     LICENSE = "MIT"
     PUBLIC = True
