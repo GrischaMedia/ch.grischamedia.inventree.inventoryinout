@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inventree-inventory-inout"
+version = "0.1.0"
+description = "InvenTree plugin: batch inventory IN/OUT via IPN scanning"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "GrischaMedia", email = "info@grischamedia.ch" }]
+keywords = ["inventree", "plugin", "inventory", "stock"]
+classifiers = [
+  "Framework :: Django",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+Homepage = "https://grischamedia.ch"
+
+[tool.setuptools]
+packages = ["inventree_inventoryinout"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"inventree_inventoryinout" = [
+  "templates/inventree_inventoryinout/*.html",
+  "static/inventree_inventoryinout/*.js",
+  "locale/*/LC_MESSAGES/*.po",
+]
