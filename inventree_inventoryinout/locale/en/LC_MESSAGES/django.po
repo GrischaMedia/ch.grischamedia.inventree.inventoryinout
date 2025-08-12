@@ -1,0 +1,72 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: inventoryinout 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-12 00:00+0000\n"
+"PO-Revision-Date: 2025-08-12 00:00+0000\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: plugin.py
+msgid "Inventar In / Out"
+msgstr "Inventory In / Out"
+
+#: plugin.py
+msgid "Schnelles Massen-Buchen von Beständen per IPN-Scan (IN/OUT)."
+msgstr "Fast bulk booking of stock via IPN scan (IN/OUT)."
+
+#: forms.py
+msgid "IPN scannen"
+msgstr "Scan IPN"
+
+#: forms.py
+msgid "Gib eine IPN ein oder scanne sie mit dem Handscanner."
+msgstr "Enter an IPN or scan it with your handheld scanner."
+
+#: templates
+msgid "IPN einscannen…"
+msgstr "Scan IPN…"
+
+msgid "Hinzufügen"
+msgstr "Add"
+
+msgid "IPN"
+msgstr "IPN"
+
+msgid "Produkt"
+msgstr "Product"
+
+msgid "Lagerpfad"
+msgstr "Location Path"
+
+msgid "Bestand"
+msgstr "Stock"
+
+msgid "IN"
+msgstr "IN"
+
+msgid "OUT"
+msgstr "OUT"
+
+msgid "Buchungstext"
+msgstr "Booking note"
+
+msgid "z.B. Wareneingang 123 oder Entnahme für Auftrag XY"
+msgstr "e.g. GRN 123 or consumption for Job XY"
+
+msgid "Buchen"
+msgstr "Post"
+
+msgid "Zurücksetzen"
+msgstr "Reset"
+
+msgid "(Kein Lagerort)"
+msgstr "(No location)"
+
+msgid "(Kein Standard-Lagerort)"
+msgstr "(No default location)"
+
+msgid "Kein Teil mit dieser IPN gefunden."
+msgstr "No part found for this IPN."
