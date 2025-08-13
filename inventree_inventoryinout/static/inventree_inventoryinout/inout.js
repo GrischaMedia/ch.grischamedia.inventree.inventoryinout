@@ -217,5 +217,3 @@
     });
   }
 })();
-
-<script src="{% static 'plugins/inventory-in-out/inventree_inventoryinout/inout.js' %}"></script>
