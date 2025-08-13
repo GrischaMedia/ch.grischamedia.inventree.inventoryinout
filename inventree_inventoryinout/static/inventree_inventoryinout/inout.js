@@ -91,6 +91,7 @@
   }
 
   function postJSON(url, payload) {
+    console.log("POST to", url, "with payload:", payload);
     return fetchJSON(url, {
       method: 'POST',
       headers: {
