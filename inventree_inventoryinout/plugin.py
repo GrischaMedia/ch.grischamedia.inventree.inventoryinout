@@ -1,3 +1,7 @@
+# Copyright (C) 2025 GrischaMedia.ch
+# Author: Sandro Geyer
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 from plugin import InvenTreePlugin
 from plugin.mixins import UrlsMixin, NavigationMixin
 from django.utils.translation import gettext_lazy as _
@@ -11,7 +15,7 @@ class InventoryInOutPlugin(UrlsMixin, NavigationMixin, InvenTreePlugin):
     DESCRIPTION = _("Schnelles Massen-Buchen von Beständen per IPN-Scan (IN/OUT).")
     AUTHOR = "GrischaMedia"
     PUBLISH_DATE = "2025-08-12"
-    VERSION = "0.3.1"
+    VERSION = "0.3.2"
     WEBSITE = "https://grischamedia.ch"
     LICENSE = "MIT"
     PUBLIC = True
@@ -21,6 +25,7 @@ class InventoryInOutPlugin(UrlsMixin, NavigationMixin, InvenTreePlugin):
             "name": _("Inventar In / Out"),
             "link": "plugin:inventoryinout-index",
             "icon": "fa-upload",
+            "roles": ["topbar", "sidebar"],
         }
     ]
 

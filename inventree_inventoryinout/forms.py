@@ -1,3 +1,7 @@
+# Copyright (C) 2025 GrischaMedia.ch
+# Author: Sandro Geyer
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 from django import forms
 from django.utils.translation import gettext_lazy as _
 

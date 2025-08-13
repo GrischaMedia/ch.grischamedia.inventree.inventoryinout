@@ -1,3 +1,7 @@
+# Copyright (C) 2025 GrischaMedia.ch
+# Author: Sandro Geyer
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 from plugin.apps import InvenTreePluginConfig
 
 class InventoryInOutConfig(InvenTreePluginConfig):

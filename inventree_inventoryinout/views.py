@@ -1,3 +1,7 @@
+# Copyright (C) 2025 GrischaMedia.ch
+# Author: Sandro Geyer
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext as _
