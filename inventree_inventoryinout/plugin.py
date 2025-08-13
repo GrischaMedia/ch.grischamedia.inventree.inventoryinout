@@ -12,7 +12,7 @@ class InventoryInOutPlugin(UrlsMixin, NavigationMixin, InvenTreePlugin):
     TITLE = _("Inventar In / Out")
     DESCRIPTION = _("Schnelles Massen-Buchen von Beständen per IPN-Scan (IN/OUT).")
     AUTHOR = "GrischaMedia"
-    VERSION = "0.3.9"
+    VERSION = "0.4.0"
     PUBLIC = True
     NAVIGATION = [
         {

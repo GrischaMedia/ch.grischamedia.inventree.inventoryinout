@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "inventree-inventory-inout"
-version = "0.3.9"
+version = "0.4.0"
 description = "InvenTree plugin: batch inventory IN/OUT via IPN scanning"
 readme = "README.md"
 license = { text = "MIT" }
@@ -31,6 +31,7 @@ include-package-data = true
 "inventree_inventoryinout" = [
   "templates/inventree_inventoryinout/*.html",
   "static/inventree_inventoryinout/*.js",
+  "static/inventree_inventoryinout/*.css",
   "locale/*/LC_MESSAGES/*.po",
 ]
 [project.entry-points."inventree.plugins"]
