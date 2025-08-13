@@ -253,8 +253,16 @@
         alert('Buchungen erfolgreich.');
         if (clearBtn) clearBtn.click();
       } catch (e) {
-        console.error('Buchen error:', e);
-        alert('Fehler beim Buchen: ' + (e.message || e) + (e.payload ? '\nDetails: ' + (typeof e.payload === 'object' ? JSON.stringify(e.payload) : e.payload) : ''));
+        console.group('Buchen error');
+        console.error('Status:', e.status);
+        console.error('Message:', e.message);
+        console.error('Payload:', e.payload);
+        console.error('Request Payload (last sent):', { adds, removes });
+        if (e.payload && typeof e.payload === 'object') {
+          console.error('Payload (pretty):', JSON.stringify(e.payload, null, 2));
+        }
+        console.groupEnd();
+        alert('Fehler beim Buchen: ' + (e.message || e) + (e.payload ? '\nDetails: ' + (typeof e.payload === 'object' ? (e.payload.detail || e.payload.error || e.payload.message || JSON.stringify(e.payload)) : e.payload) : ''));
       } finally {
         setDisabled(bookBtn, false);
       }
