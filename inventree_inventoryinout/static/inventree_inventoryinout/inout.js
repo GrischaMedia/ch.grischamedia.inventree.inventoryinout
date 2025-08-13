@@ -10,6 +10,22 @@
     if (!el) return; el.disabled = !!v; el.classList.toggle('disabled', !!v);
   }
 
+  function normQty(val) {
+    if (typeof val === 'string') val = val.replace(',', '.').trim();
+    const n = parseFloat(val);
+    return (isNaN(n) || n <= 0) ? 0 : n;
+  }
+
+  function noteFields(notes) {
+    // Some InvenTree endpoints accept "note", others "notes" – send both
+    const p = {};
+    if (notes !== undefined && notes !== null) {
+      p.notes = notes;
+      p.note = notes;
+    }
+    return p;
+  }
+
   async function fetchJSON(url, options) {
     const resp = await fetch(url, options || {});
     const contentType = resp.headers.get('content-type') || '';
@@ -79,6 +95,8 @@
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
         'X-CSRFToken': INOUT.csrf
       },
       body: JSON.stringify(payload),
@@ -153,8 +171,8 @@
         if (part) part = parseInt(part, 10);
         if (stockitem) stockitem = parseInt(stockitem, 10);
         if (location) location = parseInt(location, 10);
-        var inVal = parseFloat(tr.querySelector('.in-field')?.value || '0');
-        var outVal = parseFloat(tr.querySelector('.out-field')?.value || '0');
+        var inVal = normQty(tr.querySelector('.in-field')?.value || '0');
+        var outVal = normQty(tr.querySelector('.out-field')?.value || '0');
 
         if (Number.isNaN(inVal)) inVal = 0;
         if (Number.isNaN(outVal)) outVal = 0;
@@ -169,7 +187,7 @@
             part: part,
             location: location || null,
             quantity: inVal,
-            notes: notes
+            ...noteFields(notes)
           });
         }
         if (outVal > 0) {
@@ -180,28 +198,28 @@
           removes.push({
             items: [stockitem],
             quantity: outVal,
-            notes: notes
+            ...noteFields(notes)
           });
         }
       }
 
       async function postAdd(items, quantity, notes) {
         try {
-          return await postJSON(INOUT.endpoints.add, { items: items.map(Number), quantity, notes });
+          return await postJSON(INOUT.endpoints.add, { items: items.map(Number), quantity, ...noteFields(notes) });
         } catch (e1) {
           if (e1.status !== 400) throw e1;
           const shaped = items.map(id => ({ pk: Number(id), quantity }));
-          return await postJSON(INOUT.endpoints.add, { items: shaped, notes });
+          return await postJSON(INOUT.endpoints.add, { items: shaped, ...noteFields(notes) });
         }
       }
 
       async function postRemove(items, quantity, notes) {
         try {
-          return await postJSON(INOUT.endpoints.remove, { items: items.map(Number), quantity, notes });
+          return await postJSON(INOUT.endpoints.remove, { items: items.map(Number), quantity, ...noteFields(notes) });
         } catch (e1) {
           if (e1.status !== 400) throw e1;
           const shaped = items.map(id => ({ pk: Number(id), quantity }));
-          return await postJSON(INOUT.endpoints.remove, { items: shaped, notes });
+          return await postJSON(INOUT.endpoints.remove, { items: shaped, ...noteFields(notes) });
         }
       }
 
@@ -215,7 +233,7 @@
               location: Number(a.location),
               quantity: a.quantity,
               status: 10,
-              notes: a.notes
+              ...noteFields(a.notes)
             });
           }
         }
