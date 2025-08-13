@@ -24,7 +24,16 @@
     }
 
     if (!resp.ok) {
-      const msg = (payload && (payload.error || payload.detail || payload.message)) || (resp.status + ' ' + resp.statusText);
+      let msg = resp.status + ' ' + resp.statusText;
+      if (payload && typeof payload === 'object') {
+        if (payload.error || payload.detail || payload.message) {
+          msg = (payload.error || payload.detail || payload.message);
+        } else {
+          try { msg = JSON.stringify(payload); } catch (_) {}
+        }
+      } else if (typeof payload === 'string' && payload.trim()) {
+        msg = payload.trim();
+      }
       const err = new Error(msg);
       err.status = resp.status;
       err.payload = payload;
@@ -141,6 +150,9 @@
         var part = tr.dataset.part;
         var stockitem = tr.dataset.stockitem;
         var location = tr.dataset.location;
+        if (part) part = parseInt(part, 10);
+        if (stockitem) stockitem = parseInt(stockitem, 10);
+        if (location) location = parseInt(location, 10);
         var inVal = parseFloat(tr.querySelector('.in-field')?.value || '0');
         var outVal = parseFloat(tr.querySelector('.out-field')?.value || '0');
 
@@ -176,16 +188,19 @@
       async function processAdds() {
         for (let a of adds) {
           if (a.items.length) {
+            // Auf bestehende StockItems buchen
             await postJSON(INOUT.endpoints.add, {
-              items: a.items,
+              items: a.items.map(Number),
               quantity: a.quantity,
               notes: a.notes
             });
           } else {
+            // Neues StockItem anlegen: part + location sind Pflicht
             await postJSON(INOUT.endpoints.list, {
-              part: a.part,
-              location: a.location,
+              part: Number(a.part),
+              location: Number(a.location),
               quantity: a.quantity,
+              status: 10, // OK
               notes: a.notes
             });
           }
@@ -195,7 +210,7 @@
       async function processRemoves() {
         for (let r of removes) {
           await postJSON(INOUT.endpoints.remove, {
-            items: r.items,
+            items: r.items.map(Number),
             quantity: r.quantity,
             notes: r.notes
           });
@@ -210,7 +225,7 @@
         if (clearBtn) clearBtn.click();
       } catch (e) {
         console.error('Buchen error:', e);
-        alert('Fehler beim Buchen: ' + (e.message || e));
+        alert('Fehler beim Buchen: ' + (e.message || e) + (e.payload ? '\nDetails: ' + (typeof e.payload === 'object' ? JSON.stringify(e.payload) : e.payload) : ''));
       } finally {
         setDisabled(bookBtn, false);
       }
