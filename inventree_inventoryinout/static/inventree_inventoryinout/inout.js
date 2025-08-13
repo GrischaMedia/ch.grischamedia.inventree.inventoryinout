@@ -185,22 +185,36 @@
         }
       }
 
+      async function postAdd(items, quantity, notes) {
+        try {
+          return await postJSON(INOUT.endpoints.add, { items: items.map(Number), quantity, notes });
+        } catch (e1) {
+          if (e1.status !== 400) throw e1;
+          const shaped = items.map(id => ({ pk: Number(id), quantity }));
+          return await postJSON(INOUT.endpoints.add, { items: shaped, notes });
+        }
+      }
+
+      async function postRemove(items, quantity, notes) {
+        try {
+          return await postJSON(INOUT.endpoints.remove, { items: items.map(Number), quantity, notes });
+        } catch (e1) {
+          if (e1.status !== 400) throw e1;
+          const shaped = items.map(id => ({ pk: Number(id), quantity }));
+          return await postJSON(INOUT.endpoints.remove, { items: shaped, notes });
+        }
+      }
+
       async function processAdds() {
         for (let a of adds) {
           if (a.items.length) {
-            // Auf bestehende StockItems buchen
-            await postJSON(INOUT.endpoints.add, {
-              items: a.items.map(Number),
-              quantity: a.quantity,
-              notes: a.notes
-            });
+            await postAdd(a.items, a.quantity, a.notes);
           } else {
-            // Neues StockItem anlegen: part + location sind Pflicht
             await postJSON(INOUT.endpoints.list, {
               part: Number(a.part),
               location: Number(a.location),
               quantity: a.quantity,
-              status: 10, // OK
+              status: 10,
               notes: a.notes
             });
           }
@@ -209,11 +223,7 @@
 
       async function processRemoves() {
         for (let r of removes) {
-          await postJSON(INOUT.endpoints.remove, {
-            items: r.items.map(Number),
-            quantity: r.quantity,
-            notes: r.notes
-          });
+          await postRemove(r.items, r.quantity, r.notes);
         }
       }
 
