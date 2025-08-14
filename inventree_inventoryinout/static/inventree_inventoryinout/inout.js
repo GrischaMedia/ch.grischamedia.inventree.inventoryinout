@@ -26,6 +26,33 @@
     return p;
   }
 
+  function extractErrors(payload) {
+    if (!payload) return '';
+    // Plain string
+    if (typeof payload === 'string') return payload;
+    // Common fields
+    if (payload.detail || payload.error || payload.message) {
+      return String(payload.detail || payload.error || payload.message);
+    }
+    // DRF-style field errors -> flatten
+    try {
+      const lines = [];
+      const walk = (obj, prefix) => {
+        if (Array.isArray(obj)) {
+          obj.forEach((v, i) => walk(v, prefix + '[' + i + ']'));
+        } else if (obj && typeof obj === 'object') {
+          Object.keys(obj).forEach(k => walk(obj[k], prefix ? prefix + '.' + k : k));
+        } else if (obj !== undefined && obj !== null) {
+          lines.push(prefix + ': ' + String(obj));
+        }
+      };
+      walk(payload, '');
+      return lines.join('\n');
+    } catch (_) {
+      try { return JSON.stringify(payload); } catch (e) { return String(payload); }
+    }
+  }
+
   async function fetchJSON(url, options) {
     const resp = await fetch(url, options || {});
     const contentType = resp.headers.get('content-type') || '';
@@ -41,18 +68,14 @@
 
     if (!resp.ok) {
       let msg = resp.status + ' ' + resp.statusText;
-      if (payload && typeof payload === 'object') {
-        if (payload.error || payload.detail || payload.message) {
-          msg = (payload.error || payload.detail || payload.message);
-        } else {
-          try { msg = JSON.stringify(payload); } catch (_) {}
-        }
-      } else if (typeof payload === 'string' && payload.trim()) {
-        msg = payload.trim();
+      const human = extractErrors(payload);
+      if (human && human.trim()) {
+        msg = human.trim();
       }
       const err = new Error(msg);
       err.status = resp.status;
       err.payload = payload;
+      err.url = url;
       throw err;
     }
     return payload;
@@ -253,16 +276,18 @@
         alert('Buchungen erfolgreich.');
         if (clearBtn) clearBtn.click();
       } catch (e) {
-        console.group('Buchen error');
+        console.groupCollapsed('Buchen error', e.status || '', e.message || '');
+        console.error('URL:', e.url);
         console.error('Status:', e.status);
         console.error('Message:', e.message);
-        console.error('Payload:', e.payload);
+        console.error('Payload (raw):', e.payload);
         console.error('Request Payload (last sent):', { adds, removes });
         if (e.payload && typeof e.payload === 'object') {
-          console.error('Payload (pretty):', JSON.stringify(e.payload, null, 2));
+          try { console.error('Payload (pretty):', JSON.stringify(e.payload, null, 2)); } catch (_) {}
         }
         console.groupEnd();
-        alert('Fehler beim Buchen: ' + (e.message || e) + (e.payload ? '\nDetails: ' + (typeof e.payload === 'object' ? (e.payload.detail || e.payload.error || e.payload.message || JSON.stringify(e.payload)) : e.payload) : ''));
+        const details = extractErrors(e.payload);
+        alert('Fehler beim Buchen: ' + (e.message || e) + (details ? '\nDetails: ' + details : ''));
       } finally {
         setDisabled(bookBtn, false);
       }
