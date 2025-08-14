@@ -228,23 +228,17 @@
       }
 
       async function postAdd(items, quantity, notes) {
-        try {
-          return await postJSON(INOUT.endpoints.add, { items: items.map(Number), quantity, ...noteFields(notes) });
-        } catch (e1) {
-          if (e1.status !== 400) throw e1;
-          const shaped = items.map(id => ({ pk: Number(id), quantity }));
-          return await postJSON(INOUT.endpoints.add, { items: shaped, ...noteFields(notes) });
-        }
+        return await postJSON(INOUT.endpoints.add, {
+          items: items.map(id => ({ pk: Number(id), quantity })),
+          ...noteFields(notes)
+        });
       }
 
       async function postRemove(items, quantity, notes) {
-        try {
-          return await postJSON(INOUT.endpoints.remove, { items: items.map(Number), quantity, ...noteFields(notes) });
-        } catch (e1) {
-          if (e1.status !== 400) throw e1;
-          const shaped = items.map(id => ({ pk: Number(id), quantity }));
-          return await postJSON(INOUT.endpoints.remove, { items: shaped, ...noteFields(notes) });
-        }
+        return await postJSON(INOUT.endpoints.remove, {
+          items: items.map(id => ({ pk: Number(id), quantity })),
+          ...noteFields(notes)
+        });
       }
 
       async function processAdds() {
