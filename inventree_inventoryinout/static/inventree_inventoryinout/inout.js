@@ -287,7 +287,15 @@
         }
         console.groupEnd();
         const details = extractErrors(e.payload);
-        alert('Fehler beim Buchen: ' + (e.message || e) + (details ? '\nDetails: ' + details : ''));
+        let payloadText = '';
+        if (e.payload) {
+          try {
+            payloadText = '\n\nPayload:\n' + JSON.stringify(e.payload, null, 2);
+          } catch (_) {
+            payloadText = '\n\nPayload (raw): ' + String(e.payload);
+          }
+        }
+        alert('Fehler beim Buchen: ' + (e.message || e) + (details ? '\nDetails: ' + details : '') + payloadText);
       } finally {
         setDisabled(bookBtn, false);
       }
