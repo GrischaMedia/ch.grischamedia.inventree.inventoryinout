@@ -2,11 +2,7 @@
 # Author: Sandro Geyer
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from django.urls import path
-from . import views
+from django.views.generic import TemplateView
 
-app_name = "inventoryinout"
-
-urlpatterns = [
-    path("", views.InventoryInOutView.as_view(), name="index"),
-]
+class InventoryInOutView(TemplateView):
+    template_name = "inventree_inventoryinout/index.html"
