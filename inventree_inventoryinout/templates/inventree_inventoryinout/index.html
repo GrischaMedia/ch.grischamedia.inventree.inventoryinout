@@ -1,66 +1,73 @@
-{% extends "base.html" %}
 {% load static i18n %}
 
-{% block page_title %}{% trans "Inventar In / Out" %}{% endblock %}
+<link rel="stylesheet" href="{% static 'plugins/inventory-in-out/inventree_inventoryinout/inout.css' %}">
 
-{% block content %}
+<div class="page">
+  <div class="topbar">
+    Inventory In / Out
+  </div>
 
-<div class="panel panel-default">
-  <div class="panel-heading"><strong>{% trans "Inventar In / Out" %}</strong></div>
-  <div class="panel-body">
-
-    <form id="scan-form" class="form-inline" onsubmit="return false;">
-      <div class="form-group" style="min-width:320px;max-width:520px;width:100%;">
-        <input type="text" id="scan-input" class="form-control" placeholder="{% trans 'IPN einscannen…' %}" autocomplete="off" autofocus>
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h1 class="card-title">{% trans "Inventar In / Out" %}</h1>
       </div>
-      <button id="scan-btn" class="btn btn-primary" type="button">{% trans "Hinzufügen" %}</button>
-    </form>
 
-    <hr>
+      <div class="card-body">
+        <!-- Scan-Zeile -->
+        <div class="grid">
+          <div>
+            <div class="label">{% trans "IPN scannen…" %}</div>
+            <input id="scan-input" class="input" autocomplete="off" placeholder="{% trans 'IPN / Barcode' %}">
+          </div>
+          <div style="align-self:end;">
+            <button id="scan-btn" type="button" class="btn btn-primary">
+              + {% trans "Hinzufügen" %}
+            </button>
+          </div>
+        </div>
 
-    <div class="table-responsive">
-      <table id="io-table" class="table table-striped table-condensed">
-        <thead>
-          <tr>
-            <th>{% trans "IPN" %}</th>
-            <th>{% trans "Produkt" %}</th>
-            <th>{% trans "Lagerpfad" %}</th>
-            <th class="text-right">{% trans "Bestand" %}</th>
-            <th style="width:120px;">{% trans "IN" %}</th>
-            <th style="width:120px;">{% trans "OUT" %}</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+        <!-- Notiz -->
+        <div class="grid-1">
+          <div>
+            <div class="label">{% trans "Buchungstext" %}</div>
+            <input id="booking-notes" class="input" placeholder="{% trans 'z.B. Wareneingang 123' %}">
+            <div class="muted" style="margin-top:6px;">
+              {% trans "Tipp:" %} <span class="kbd">Enter</span> {% trans "im Scan-Feld fügt ebenfalls hinzu." %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabelle -->
+        <div class="table-wrap">
+          <table id="io-table" class="table">
+            <thead>
+              <tr>
+                <th>{% trans "IPN" %}</th>
+                <th>{% trans "Produkt" %}</th>
+                <th>{% trans "Lagerpfad" %}</th>
+                <th class="right">{% trans "Bestand" %}</th>
+                <th class="qty right">IN</th>
+                <th class="qty right">OUT</th>
+                <th class="actions"></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Aktionen -->
+        <div class="toolbar">
+          <button id="book-btn" class="btn btn-success">{% trans "Buchen" %}</button>
+          <button id="clear-btn" class="btn btn-ghost">{% trans "Zurücksetzen" %}</button>
+        </div>
+
+        <!-- Optional: Platz für Klartext-Protokoll -->
+        <div id="plain-log" class="muted" style="margin-top:10px; white-space:pre-wrap;"></div>
+      </div>
     </div>
-
-    <div class="form-group">
-      <label for="booking-notes">{% trans "Buchungstext" %}</label>
-      <input id="booking-notes" type="text" class="form-control" placeholder="{% trans 'z.B. Wareneingang 123 oder Entnahme für Auftrag XY' %}">
-    </div>
-
-    <div class="text-right">
-      <button id="book-btn" class="btn btn-success">
-        <i class="fa fa-check"></i> {% trans "Buchen" %}
-      </button>
-      <button id="clear-btn" class="btn btn-default">{% trans "Zurücksetzen" %}</button>
-    </div>
-
   </div>
 </div>
 
-<script>
-  window.INOUT = {
-    csrf: '{{ csrf_token }}',
-    endpoints: {
-      lookup: '{% url "plugin:inventory-in-out:index" %}',
-      add: '{% url "api-stock-add" %}',
-      remove: '{% url "api-stock-remove" %}',
-      list: '{% url "api-stock-list" %}',
-    }
-  }
-</script>
+<!-- Deine bestehende JS-Datei muss so eingebunden bleiben (Pfad wie bei dir funktionierend): -->
 <script src="{% static 'plugins/inventory-in-out/inventree_inventoryinout/inout.js' %}"></script>
-
-{% endblock %}
