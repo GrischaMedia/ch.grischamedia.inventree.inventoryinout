@@ -69,5 +69,19 @@
   </div>
 </div>
 
+<script>
+  window.INOUT = {
+    csrf: '{{ csrf_token }}',
+    endpoints: {
+      lookup: '{% url "plugin:inventoryinout-index" %}',
+      add:    '{% url "api-stock-add" %}',
+      remove: '{% url "api-stock-remove" %}',
+      list:   '{% url "api-stock-list" %}',
+    },
+    adds: [],
+    removes: []
+  };
+</script>
+
 <!-- Deine bestehende JS-Datei muss so eingebunden bleiben (Pfad wie bei dir funktionierend): -->
 <script src="{% static 'plugins/inventory-in-out/inventree_inventoryinout/inout.js' %}"></script>
