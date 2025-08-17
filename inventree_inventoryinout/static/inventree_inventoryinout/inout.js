@@ -26,6 +26,25 @@
     return p;
   }
 
+  function requireNotesOrFail() {
+    var el = document.getElementById('booking-notes');
+    var val = (el && el.value) ? el.value.trim() : '';
+    if (!val) {
+      // Try native validation hint if available
+      try {
+        if (el && el.setCustomValidity) {
+          el.setCustomValidity('Bitte den Buchungstext ausfüllen.');
+          if (el.reportValidity) el.reportValidity();
+          // Clear the message so it does not persist
+          setTimeout(function(){ el.setCustomValidity(''); }, 500);
+        }
+      } catch (_) {}
+      if (el && el.focus) el.focus();
+      throw new Error('Buchungstext erforderlich');
+    }
+    return val;
+  }
+
   function extractErrors(payload) {
     if (!payload) return '';
     // Plain string
@@ -176,12 +195,15 @@
       tableBody.innerHTML = '';
       var notesEl = document.getElementById('booking-notes');
       if (notesEl) notesEl.value = '';
+      try {
+        if (notesEl && notesEl.setCustomValidity) notesEl.setCustomValidity('');
+      } catch (_) {}
     });
   }
 
   if (bookBtn) {
     bookBtn.addEventListener('click', async function(){
-      var notes = (document.getElementById('booking-notes') || {}).value || '';
+      var notes = requireNotesOrFail();
       var rows = Array.from(tableBody.querySelectorAll('tr'));
       if (!rows.length) { alert('Keine Positionen'); return; }
 

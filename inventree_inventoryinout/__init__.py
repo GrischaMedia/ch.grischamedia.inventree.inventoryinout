@@ -3,5 +3,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 __all__ = ["__version__"]
-__version__ = "0.4.13"
+__version__ = "0.4.14"
 default_app_config = "inventree_inventoryinout.apps.InventoryInOutConfig"
