@@ -15,21 +15,14 @@
 
       <div class="card-body">
         <!-- Scan-Zeile -->
-        <div class="grid">
-          <div>
-            <div>
-              <div class="label">{% trans "IPN scannen / eingeben" %}</div>
-              <input id="scan-input" class="input" autocomplete="off" placeholder="{% trans 'IPN / Barcode' %}">
-              <p class="muted" style="margin-top:6px;">
-                {% trans "Tipp:" %} <span class="kbd">Enter</span> {% trans "im Scan-Feld fügt ebenfalls hinzu." %}
-              </p>
-            </div>
+        <div>
+          <div class="inputbar">
+            <input id="scan-input" class="input" autocomplete="off" placeholder="{% trans 'IPN / Barcode' %}">
+            <button id="scan-btn" type="button" class="btn btn-primary">+ {% trans "Hinzufügen" %}</button>
           </div>
-          <div style="align-self:end;">
-            <button id="scan-btn" type="button" class="btn btn-primary">
-              + {% trans "Hinzufügen" %}
-            </button>
-          </div>
+          <p class="muted" style="margin-top:6px;">
+            {% trans "Tipp:" %} <span class="kbd">Enter</span> {% trans "im Scan-Feld fügt ebenfalls hinzu." %}
+          </p>
         </div>
 
         <!-- Notiz -->
@@ -51,7 +44,7 @@
                 <th class="right">{% trans "Bestand" %}</th>
                 <th class="qty right">{% trans "Einbuchen" %}</th>
                 <th class="qty right">{% trans "Ausbuchen" %}</th>
-                <th class="actions"></th>
+                <th class="text-right">{% trans "Aktion" %}</th>
               </tr>
             </thead>
             <tbody></tbody>

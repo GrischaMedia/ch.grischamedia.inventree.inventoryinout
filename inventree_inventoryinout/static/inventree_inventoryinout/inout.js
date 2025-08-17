@@ -101,6 +101,30 @@
   }
 
   function addRow(row) {
+    // Try to find an existing row: prefer stockitem, otherwise part+location
+    const rows = Array.from(tableBody.querySelectorAll('tr'));
+    let match = null;
+    if (row.stockitem) {
+      match = rows.find(tr => String(tr.dataset.stockitem || '') === String(row.stockitem));
+    }
+    if (!match && row.part) {
+      const locId = String(row.location_id || '');
+      match = rows.find(tr => String(tr.dataset.part || '') === String(row.part)
+                            && String(tr.dataset.location || '') === locId
+                            && !tr.dataset.stockitem);
+    }
+
+    if (match) {
+      // If a matching row exists, bump the IN quantity by 1
+      const inEl = match.querySelector('.in-field');
+      const current = normQty(inEl?.value || '0');
+      const next = (isNaN(current) ? 0 : current) + 1;
+      if (inEl) inEl.value = String(next);
+      match.scrollIntoView({ block: 'nearest' });
+      return;
+    }
+
+    // Otherwise create a new row
     var tr = document.createElement('tr');
     tr.dataset.part = row.part;
     tr.dataset.stockitem = row.stockitem || '';
@@ -111,9 +135,19 @@
       '<td>' + (row.name || '') + '</td>',
       '<td>' + (row.location || '') + '</td>',
       '<td class="text-right">' + (row.quantity || 0) + ' ' + (row.units || '') + '</td>',
-      '<td><input type="number" step="any" min="0" class="form-control input-sm in-field" placeholder="0"></td>',
+      '<td><input type="number" step="any" min="0" class="form-control input-sm in-field" placeholder="0" value="1"></td>',
       '<td><input type="number" step="any" min="0" class="form-control input-sm out-field" placeholder="0"></td>',
-      '<td><button class="btn btn-xs btn-link remove-row" title="Remove"><i class="fa fa-trash"></i></button></td>'
+      '<td class="text-right">\
+        <button type="button" class="io-btn io-btn-ghost remove-row" title="Entfernen" aria-label="Zeile entfernen">\
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="io-icon">\
+            <polyline points="3 6 5 6 21 6"></polyline>\
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>\
+            <path d="M10 11v6M14 11v6"></path>\
+            <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>\
+          </svg>\
+          <span class="io-hide-sm">Entfernen</span>\
+        </button>\
+      </td>'
     ].join('');
 
     tableBody.prepend(tr);
