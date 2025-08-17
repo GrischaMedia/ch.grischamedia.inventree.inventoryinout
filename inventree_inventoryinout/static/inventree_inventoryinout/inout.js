@@ -135,7 +135,7 @@
       '<td>' + (row.name || '') + '</td>',
       '<td>' + (row.location || '') + '</td>',
       '<td class="text-right">' + (row.quantity || 0) + ' ' + (row.units || '') + '</td>',
-      '<td><input type="number" step="any" min="0" class="form-control input-sm in-field" placeholder="0" value="1"></td>',
+      '<td><input type="number" step="any" min="0" class="form-control input-sm in-field" placeholder="0" value=""></td>',
       '<td><input type="number" step="any" min="0" class="form-control input-sm out-field" placeholder="0"></td>',
       '<td class="text-right">\
         <button type="button" class="io-btn io-btn-ghost remove-row" title="Entfernen" aria-label="Zeile entfernen">\
