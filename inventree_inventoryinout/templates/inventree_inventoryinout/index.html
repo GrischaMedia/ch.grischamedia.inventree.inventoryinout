@@ -73,7 +73,7 @@
   window.INOUT = {
     csrf: '{{ csrf_token }}',
     endpoints: {
-      lookup: '{% url "plugin:inventoryinout-index" %}',
+      lookup: '{% url "plugin:inventory-in-out:index" %}',
       add:    '{% url "api-stock-add" %}',
       remove: '{% url "api-stock-remove" %}',
       list:   '{% url "api-stock-list" %}',

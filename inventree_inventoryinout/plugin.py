@@ -15,20 +15,20 @@ class InventoryInOutPlugin(UrlsMixin, NavigationMixin, InvenTreePlugin):
     TITLE = _("Inventar In / Out")
     DESCRIPTION = _("Schnelles Massen-Buchen von Beständen per IPN-Scan (IN/OUT).")
     AUTHOR = "GrischaMedia"
-    VERSION = "0.4.12"
+    VERSION = "0.4.13"
     WEBSITE = "https://grischamedia.ch"
     LICENSE = "MIT"
     PUBLIC = True
 
     # Eintrag in die Navigation (Topbar + Sidebar)
     NAVIGATION = [
-        {
-            "name": _("Inventar In / Out"),
-            "link": "plugin:inventory-in-out:index",
-            "icon": "fa-upload",
-            "roles": ["topbar", "sidebar"],
-        }
-    ]
+    {
+        "name": _("Inventar In / Out"),
+        "link": "plugin:inventory-in-out:index",
+        "icon": "fa-upload",
+        "roles": ["topbar", "sidebar"],
+    }
+]
 
     def setup_urls(self):
         from . import urls
