@@ -37,6 +37,11 @@ Passen Sie diese Variablen entsprechend Ihrer Umgebung an, um eine reibungslose 
 
 Nach der Installation starten Sie InvenTree neu. Anschließend können Sie das Plugin in den Einstellungen unter „Plugins“ aktivieren, indem Sie „Inventar In / Out“ auswählen.
 
+## Aufruf der Seite
+
+Nach erfolgreicher Installation und Aktivierung des Plugins erreichst du die Seite über deine InvenTree-Instanz:
+https://DEIN-SERVER/plugin/inventory-in-out/
+
 ## Nutzungshinweise
 
 Nach der Aktivierung finden Sie das Plugin in der Navigation von InvenTree. Dort können Sie per Barcode-Scan Teile suchen, Mengen für Ein- oder Ausbuchungen eingeben und die Buchungen gesammelt mit einer optionalen Notiz speichern. Die Historie zeigt alle getätigten Buchungen übersichtlich an.
