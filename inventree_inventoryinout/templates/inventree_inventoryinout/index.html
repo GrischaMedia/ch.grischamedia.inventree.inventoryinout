@@ -16,10 +16,10 @@
       <div class="card-body">
         <!-- Scan-Zeile -->
         <div>
-          <label for="scan-input" class="io-label">{% trans "IPN scannen / eingeben" %}</label>
+          <label for="scan-input" class="io-label label">{% trans "IPN scannen / eingeben" %}</label>
           <div class="io-input-row">
-            <input id="scan-input" class="io-input" type="text" autocomplete="off" placeholder="{% trans 'IPN / Barcode' %}">
-            <button id="scan-btn" type="button" class="io-btn io-btn-primary">+ {% trans "Hinzufügen" %}</button>
+            <input id="scan-input" class="io-input form-control" type="text" autocomplete="off" placeholder="{% trans 'IPN / Barcode' %}">
+            <button id="scan-btn" type="button" class="io-btn io-btn-primary btn btn-primary">+ {% trans "Hinzufügen" %}</button>
           </div>
           <p class="io-hint">
             {% trans "Tipp:" %} <kbd>Enter</kbd> {% trans "im Scan-Feld fügt ebenfalls hinzu." %}
@@ -29,22 +29,22 @@
         <!-- Notiz -->
         <div class="grid-1">
           <div>
-            <div class="io-label">{% trans "Buchungstext" %}</div>
-            <input id="booking-notes" class="io-input" required placeholder="{% trans 'z.B. Wareneingang 123' %}">
+            <div class="io-label label">{% trans "Buchungstext" %}</div>
+            <input id="booking-notes" class="io-input form-control" required placeholder="{% trans 'z.B. Wareneingang 123' %}">
           </div>
         </div>
 
         <!-- Tabelle -->
         <div class="table-wrap">
-          <table id="io-table" class="table">
+          <table id="io-table" class="table table-striped io-table">
             <thead>
               <tr>
                 <th>{% trans "IPN" %}</th>
                 <th>{% trans "Produkt" %}</th>
                 <th>{% trans "Lagerpfad" %}</th>
-                <th class="right">{% trans "Bestand" %}</th>
-                <th class="qty right">{% trans "Einbuchen" %}</th>
-                <th class="qty right">{% trans "Ausbuchen" %}</th>
+                <th class="right text-right">{% trans "Bestand" %}</th>
+                <th class="qty right text-right">{% trans "Einbuchen" %}</th>
+                <th class="qty right text-right">{% trans "Ausbuchen" %}</th>
                 <th class="text-right">{% trans "Aktion" %}</th>
               </tr>
             </thead>
@@ -54,8 +54,8 @@
 
         <!-- Aktionen -->
         <div class="toolbar">
-          <button id="book-btn" class="btn btn-success">{% trans "Buchen" %}</button>
-          <button id="clear-btn" class="btn btn-ghost">{% trans "Zurücksetzen" %}</button>
+          <button id="book-btn" class="btn btn-success io-btn io-btn-success">{% trans "Buchen" %}</button>
+          <button id="clear-btn" class="btn btn-ghost io-btn io-btn-ghost">{% trans "Zurücksetzen" %}</button>
         </div>
 
         <!-- Optional: Platz für Klartext-Protokoll -->

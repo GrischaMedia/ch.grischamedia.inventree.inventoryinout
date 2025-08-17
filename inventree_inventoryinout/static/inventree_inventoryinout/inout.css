@@ -203,8 +203,9 @@ textarea.input {
   .io-hide-sm{ display:none; }
 }
 
-.io-input-row{display:flex;align-items:center;gap:.75rem}
+.io-input-row{display:flex;align-items:center;gap:.75rem;margin:.35rem 0 .6rem}
 .io-input-row .io-input{flex:1}
+.io-input-row .io-btn{height:40px}
 
 /* Base styling for new .io-input */
 .io-input,
@@ -225,7 +226,7 @@ textarea.input {
 }
 .io-input::placeholder{ color:#9ca3af; }
 
-.io-label{display:block;font-weight:600;margin:8px 0 4px}
+.io-label{display:block;font-weight:600;margin:8px 0 6px;color:#374151;font-size:.95rem}
 .io-hint{margin:.5rem 0 1rem;color:#6b7280;font-size:.95rem}
 
 /* Unify .io-btn so it doesn't fall back to OS default */
@@ -245,3 +246,20 @@ textarea.input {
 .io-btn-ghost:hover{color:#ef4444}
 .io-icon{vertical-align:middle}
 .text-right{text-align:right}
+
+/* ---- Harmonisierung der Tabelle (.io-table) ---- */
+.io-table thead th{background:#f9fafb;font-weight:700;color:#6b7280}
+.io-table tbody td{vertical-align:middle}
+.io-table .qty{width:140px}
+.io-table .actions{width:72px;text-align:right}
+.io-table .qty .io-input{width:100%}
+.io-table tbody tr:nth-child(even){background:#fbfcff}
+
+/* ---- Remove-Button visuell klarer ---- */
+.remove-row.io-btn-ghost{border-color:#e5e7eb}
+.remove-row .io-icon{width:18px;height:18px;color:#6b7280}
+.remove-row:hover{background:#fef2f2;border-color:#fecaca;color:#b91c1c}
+.remove-row:hover .io-icon{color:#b91c1c}
+
+/* Kleine Tweaks */
+.io-hint{margin:.45rem 0 1rem}
