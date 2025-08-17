@@ -54,12 +54,12 @@
 
         <!-- Aktionen -->
         <div class="toolbar">
-          <button id="book-btn" class="btn btn-success io-btn io-btn-success">{% trans "Buchen" %}</button>
+          <button id="book-btn" class="btn btn-success io-btn io-btn-success" data-role="book">{% trans "Buchen" %}</button>
           <button id="clear-btn" class="btn btn-ghost io-btn io-btn-ghost">{% trans "Zurücksetzen" %}</button>
         </div>
 
         <!-- Optional: Platz für Klartext-Protokoll -->
-        <div id="plain-log" class="muted" style="margin-top:10px; white-space:pre-wrap;"></div>
+        <div id="plain-log" class="muted" style="margin-top:10px; white-space:pre-wrap;" aria-live="polite"></div>
       </div>
     </div>
   </div>

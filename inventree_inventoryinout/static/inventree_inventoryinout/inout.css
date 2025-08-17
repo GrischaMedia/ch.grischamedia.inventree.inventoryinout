@@ -1,5 +1,6 @@
 /* ===== Reset / Basics ===== */
 * { box-sizing: border-box; }
+button, input { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
   margin: 0;
@@ -62,6 +63,18 @@ body {
   -webkit-appearance: none;              /* Safari */
   appearance: none;
 }
+
+/* Cross‑browser Feinjustierung */
+.io-input,
+.input{
+  line-height: 1.2;               /* verhindert Safari-Höhensprünge */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Firefox Button‑Inner Padding entfernen (sonst unterschiedliche Höhe) */
+button::-moz-focus-inner{ border:0; padding:0; }
+
 .io-input:focus, .input:focus{
   border-color: #6366f1;                 /* indigo-500 */
   box-shadow: 0 0 0 4px rgba(99,102,241,.12);
@@ -78,10 +91,26 @@ body {
 /* Number-Input: Spinner entfernen (Firefox) */
 .io-input[type="number"], .input[type="number"]{ -moz-appearance: textfield; }
 
-/* Scanzeile */
-.io-input-row{ display:flex; align-items:center; gap:.75rem; margin-top:.25rem; }
-.io-input-row .io-input{ flex:1; }
-.io-input-row .io-btn{ height:40px; }
+/* Scanzeile: Safari/Firefox konsistent nebeneinander */
+.io-input-row{
+  display:flex;
+  align-items:stretch;            /* gleiche Höhe für beide Elemente */
+  gap:.75rem;
+  margin-top:.25rem;
+}
+.io-input-row .io-input{
+  flex:1;
+  height:40px;                    /* fixiert die visuelle Höhe (FF & Safari) */
+}
+.io-input-row .io-btn{
+  height:40px;                    /* gleiche Höhe wie Input */
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  white-space:nowrap;
+  -webkit-appearance:none;        /* Safari angleichen */
+  appearance:none;
+}
 
 /* Hinweistext unter dem Scan-Feld */
 .io-hint{ margin:.5rem 0 1rem; color:#6b7280; font-size:.95rem; }
@@ -117,14 +146,16 @@ body {
 
 /* Falls irgendwo noch alte Klassen verwendet werden: „Buchen“ immer sichtbar */
 #book-btn,
-.btn-success{
+.btn-success,
+.io-btn-primary[data-role="book"]{
   background:#059669 !important;  /* emerald-600 */
   color:#fff !important;
-  border: none !important;
-  opacity: 1 !important;
+  border:none !important;
+  opacity:1 !important;           /* Safari: nie ausblenden */
 }
 #book-btn:hover,
-.btn-success:hover{ background:#047857 !important; }
+.btn-success:hover,
+.io-btn-primary[data-role="book"]:hover{ background:#047857 !important; }
 
 /* ===== Table ===== */
 .table-wrap {

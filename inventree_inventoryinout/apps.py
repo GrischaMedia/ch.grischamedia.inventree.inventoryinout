@@ -11,5 +11,5 @@ class InventoryInOutConfig(InvenTreePluginConfig):
     PLUGIN_NAME = "Inventar In / Out"
     PLUGIN_SLUG = "inventory-in-out"
     PLUGIN_AUTHOR = "GrischaMedia"
-    PLUGIN_VERSION = "0.4.19"
+    PLUGIN_VERSION = "0.4.20"
     PLUGIN_DESCRIPTION = "Schnelles Massen-Buchen von Beständen per IPN-Scan (IN/OUT)."
