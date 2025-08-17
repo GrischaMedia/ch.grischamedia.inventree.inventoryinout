@@ -16,7 +16,7 @@
       <div class="card-body">
         <!-- Scan-Zeile -->
         <div>
-          <label for="scan-input" class="label">{% trans "IPN scannen / eingeben" %}</label>
+          <label for="scan-input" class="io-label">{% trans "IPN scannen / eingeben" %}</label>
           <div class="io-input-row">
             <input id="scan-input" class="io-input" type="text" autocomplete="off" placeholder="{% trans 'IPN / Barcode' %}">
             <button id="scan-btn" type="button" class="io-btn io-btn-primary">+ {% trans "Hinzufügen" %}</button>
@@ -29,8 +29,8 @@
         <!-- Notiz -->
         <div class="grid-1">
           <div>
-            <div class="label">{% trans "Buchungstext" %}</div>
-            <input id="booking-notes" class="input" required placeholder="{% trans 'z.B. Wareneingang 123' %}">
+            <div class="io-label">{% trans "Buchungstext" %}</div>
+            <input id="booking-notes" class="io-input" required placeholder="{% trans 'z.B. Wareneingang 123' %}">
           </div>
         </div>
 
