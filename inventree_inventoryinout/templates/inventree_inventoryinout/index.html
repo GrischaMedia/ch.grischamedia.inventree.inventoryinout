@@ -4,7 +4,7 @@
 
 <div class="page">
   <div class="topbar">
-    Inventory In / Out
+    Inventree - Inventory Ein/Aus
   </div>
 
   <div class="container">
@@ -21,8 +21,8 @@
             <input id="scan-input" class="io-input form-control" type="text" autocomplete="off" placeholder="{% trans 'IPN / Barcode' %}">
             <button id="scan-btn" type="button" class="io-btn io-btn-primary btn btn-primary">+ {% trans "Hinzufügen" %}</button>
           </div>
-          <p class="io-hint">
-            {% trans "Tipp:" %} <kbd>Enter</kbd> {% trans "im Scan-Feld fügt ebenfalls hinzu." %}
+          <p class="io-hint" style="font-size:0.9em; color:#555;">
+            {% trans "Tipp:" %} <kbd style="background:#000; color:#fff; padding:2px 6px; border-radius:4px;">Enter</kbd> {% trans "im Scan-Feld fügt ebenfalls hinzu." %}
           </p>
         </div>
 
@@ -63,6 +63,9 @@
       </div>
     </div>
   </div>
+  <footer class="io-footer" style="margin-top:20px; text-align:center; font-size:0.85em; color:#666;">
+    &copy; 2025 GrischaMedia – <a href="https://github.com/GrischaMedia/ch.grischamedia.inventree.inventoryinout" target="_blank">GitHub Repository</a>
+  </footer>
 </div>
 
 <script>
