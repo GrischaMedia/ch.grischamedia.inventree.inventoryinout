@@ -4,6 +4,9 @@ Dieses Plugin ermöglicht eine schnelle und effiziente Massenbuchung von Lagerbe
 
 Das Plugin unterstützt das Scannen von Teilenummern, zeigt den vollständigen Lagerpfad sowie den aktuellen Bestand an und erlaubt die Eingabe von Mengen für Ein- und Ausbuchungen pro Zeile. Mehrere Buchungen können gesammelt mit einer Notiz versehen und anschließend in der Historie gespeichert werden.
 
+<img width="1126" height="634" alt="image" src="https://github.com/user-attachments/assets/aee89616-09da-4416-82e0-9b62426695f3" />
+
+
 ## Installation
 
 Die Installation kann direkt über GitHub erfolgen. Verwenden Sie dazu den folgenden Befehl:
