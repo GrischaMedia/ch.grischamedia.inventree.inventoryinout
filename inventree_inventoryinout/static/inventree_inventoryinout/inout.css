@@ -202,3 +202,14 @@ textarea.input {
 @media (max-width: 640px){
   .io-hide-sm{ display:none; }
 }
+
+.io-input-row{display:flex;align-items:center;gap:.75rem}
+.io-input-row .io-input{flex:1}
+.io-label{display:block;font-weight:600;margin:8px 0 4px}
+.io-hint{margin:.5rem 0 1rem;color:#6b7280;font-size:.95rem}
+.io-btn{border:0;border-radius:10px;padding:.5rem .9rem;cursor:pointer}
+.io-btn-primary{background:#5b4df2;color:#fff}
+.io-btn-ghost{background:transparent;color:#6b7280}
+.io-btn-ghost:hover{color:#ef4444}
+.io-icon{vertical-align:middle}
+.text-right{text-align:right}

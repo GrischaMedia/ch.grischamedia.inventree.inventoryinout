@@ -16,12 +16,13 @@
       <div class="card-body">
         <!-- Scan-Zeile -->
         <div>
-          <div class="inputbar">
-            <input id="scan-input" class="input" autocomplete="off" placeholder="{% trans 'IPN / Barcode' %}">
-            <button id="scan-btn" type="button" class="btn btn-primary">+ {% trans "Hinzufügen" %}</button>
+          <label for="scan-input" class="label">{% trans "IPN scannen / eingeben" %}</label>
+          <div class="io-input-row">
+            <input id="scan-input" class="io-input" type="text" autocomplete="off" placeholder="{% trans 'IPN / Barcode' %}">
+            <button id="scan-btn" type="button" class="io-btn io-btn-primary">+ {% trans "Hinzufügen" %}</button>
           </div>
-          <p class="muted" style="margin-top:6px;">
-            {% trans "Tipp:" %} <span class="kbd">Enter</span> {% trans "im Scan-Feld fügt ebenfalls hinzu." %}
+          <p class="io-hint">
+            {% trans "Tipp:" %} <kbd>Enter</kbd> {% trans "im Scan-Feld fügt ebenfalls hinzu." %}
           </p>
         </div>
 

@@ -222,6 +222,24 @@
         btn.closest('tr').remove();
       }
     });
+
+    // Live-sanitize numeric fields (replace comma, clamp to >= 0)
+    tableBody.addEventListener('input', function(e){
+      const el = e.target;
+      if (!el || !(el.classList && (el.classList.contains('in-field') || el.classList.contains('out-field')))) return;
+      // Replace comma with dot while typing
+      if (typeof el.value === 'string') {
+        el.value = el.value.replace(',', '.');
+      }
+    });
+
+    tableBody.addEventListener('change', function(e){
+      const el = e.target;
+      if (!el || !(el.classList && (el.classList.contains('in-field') || el.classList.contains('out-field')))) return;
+      let n = parseFloat((el.value || '').trim());
+      if (isNaN(n) || n < 0) n = 0;
+      el.value = String(n);
+    });
   }
 
   if (clearBtn) {
@@ -281,6 +299,12 @@
             ...noteFields(notes)
           });
         }
+      }
+
+      // Require at least one movement (in or out)
+      if (adds.length === 0 && removes.length === 0) {
+        alert('Keine Mengen eingegeben. Bitte mindestens eine Menge bei "Einbuchen" oder "Ausbuchen" setzen.');
+        return;
       }
 
       async function postAdd(items, quantity, notes) {
