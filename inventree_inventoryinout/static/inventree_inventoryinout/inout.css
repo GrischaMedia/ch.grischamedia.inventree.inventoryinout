@@ -9,12 +9,7 @@ body {
 }
 
 /* ===== Page Layout ===== */
-.page {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
+.page { min-height: 100%; display: flex; flex-direction: column; }
 .topbar {
   background: #111827; /* gray-900 */
   color: #fff;
@@ -22,13 +17,7 @@ body {
   font-weight: 600;
   letter-spacing: .2px;
 }
-
-.container {
-  width: 100%;
-  max-width: 1100px;
-  margin: 24px auto;
-  padding: 0 16px;
-}
+.container { width: 100%; max-width: 1100px; margin: 24px auto; padding: 0 16px; }
 
 /* ===== Card ===== */
 .card {
@@ -38,96 +27,104 @@ body {
   overflow: hidden;
   border: 1px solid rgba(17,24,39,0.06);
 }
-
 .card-header {
   padding: 16px 18px;
   border-bottom: 1px solid rgba(17,24,39,0.06);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: flex; align-items: center; justify-content: space-between;
 }
-
-.card-title {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.card-body {
-  padding: 18px;
-}
+.card-title { margin: 0; font-size: 18px; font-weight: 700; }
+.card-body { padding: 18px; }
 
 /* ===== Form Grid ===== */
-.grid {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 12px;
-}
-.grid-1 {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin-top: 12px;
-}
+.grid { display: grid; grid-template-columns: 1fr auto; gap: 12px; }
+.grid-1 { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 12px; }
 
-.label {
-  font-size: 12px;
+.label, .io-label {
+  display:block;
+  font-size: .95rem;
   font-weight: 600;
-  color: #6b7280; /* gray-500 */
-  margin-bottom: 6px;
+  color: #374151; /* gray-700 */
+  margin: 8px 0 4px;
 }
 
-.input, .input[type="number"] {
+/* ===== Inputs (vereinheitlicht + Safari/Firefox Normalisierung) ===== */
+.io-input, .io-input[type="number"],
+.input, .input[type="number"]{
   width: 100%;
   height: 40px;
   padding: 8px 12px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #d1d5db;            /* gray-300 */
   border-radius: 10px;
   background: #fff;
   outline: none;
   transition: box-shadow .15s ease, border-color .15s ease;
+  font: inherit;
+  -webkit-appearance: none;              /* Safari */
+  appearance: none;
 }
-.input:focus {
-  border-color: #6366f1; /* indigo-500 */
+.io-input:focus, .input:focus{
+  border-color: #6366f1;                 /* indigo-500 */
   box-shadow: 0 0 0 4px rgba(99,102,241,.12);
 }
+.io-input::placeholder, .input::placeholder{ color:#9ca3af; }
 
-textarea.input {
-  height: auto;
-  min-height: 40px;
-  resize: vertical;
+/* Number-Input: Spinner entfernen (Safari/Chrome) */
+.io-input[type="number"]::-webkit-outer-spin-button,
+.io-input[type="number"]::-webkit-inner-spin-button,
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button{
+  -webkit-appearance: none; margin: 0;
+}
+/* Number-Input: Spinner entfernen (Firefox) */
+.io-input[type="number"], .input[type="number"]{ -moz-appearance: textfield; }
+
+/* Scanzeile */
+.io-input-row{ display:flex; align-items:center; gap:.75rem; margin-top:.25rem; }
+.io-input-row .io-input{ flex:1; }
+.io-input-row .io-btn{ height:40px; }
+
+/* Hinweistext unter dem Scan-Feld */
+.io-hint{ margin:.5rem 0 1rem; color:#6b7280; font-size:.95rem; }
+
+/* ===== Buttons (nur ein konsolidierter Satz) ===== */
+.io-btn{
+  display:inline-flex; align-items:center; gap:.4rem;
+  -webkit-appearance:none; appearance:none;
+  border:1px solid transparent;
+  border-radius:10px;
+  padding:.5rem .9rem;
+  font-weight:600;
+  cursor:pointer;
+  transition: background .15s, border-color .15s, color .15s, transform .03s;
+  background:transparent;
+  user-select:none;
+}
+.io-btn:active{ transform: translateY(1px); }
+.io-btn-primary{ background:#5b55ff; color:#fff; }
+.io-btn-primary:hover{ background:#514cf5; }
+.io-btn-ghost{ background:transparent; color:#6b7280; border-color:#e5e7eb; }
+.io-btn-ghost:hover{ background:#f3f4f6; color:#111827; }
+.io-icon{ display:block; vertical-align:middle; }
+.text-right{ text-align:right; }
+
+/* Remove-Button feintunen: grau -> rot bei Hover */
+.remove-row.io-btn-ghost{ color:#6b7280; border-color:#e5e7eb; }
+.remove-row.io-btn-ghost:hover{
+  background:#fee2e2;            /* red-100 */
+  color:#b91c1c;                  /* red-700 */
+  border-color:#fecaca;           /* red-200 */
 }
 
-/* ===== Buttons ===== */
-.btn {
-  appearance: none;
-  border: 0;
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform .03s ease, box-shadow .15s ease, background .15s ease;
-  user-select: none;
+/* Falls irgendwo noch alte Klassen verwendet werden: „Buchen“ immer sichtbar */
+#book-btn,
+.btn-success{
+  background:#059669 !important;  /* emerald-600 */
+  color:#fff !important;
+  border: none !important;
+  opacity: 1 !important;
 }
-.btn:active { transform: translateY(1px); }
-
-.btn-primary {
-  background: #4f46e5; /* indigo-600 */
-  color: #fff;
-}
-.btn-primary:hover { background: #4338ca; }
-
-.btn-success {
-  background: #059669; /* emerald-600 */
-  color: #fff;
-}
-.btn-success:hover { background: #047857; }
-
-.btn-ghost {
-  background: #eef2ff; /* indigo-50 */
-  color: #3730a3;      /* indigo-800 */
-}
-.btn-ghost:hover { background: #e0e7ff; }
+#book-btn:hover,
+.btn-success:hover{ background:#047857 !important; }
 
 /* ===== Table ===== */
 .table-wrap {
@@ -136,13 +133,8 @@ textarea.input {
   border-radius: 12px;
   overflow: hidden;
 }
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #fff;
-}
-.table thead th {
+.table, .io-table { width:100%; border-collapse:collapse; background:#fff; }
+.table thead th, .io-table thead th{
   text-align: left;
   font-size: 12px;
   font-weight: 700;
@@ -151,115 +143,31 @@ textarea.input {
   padding: 12px 14px;
   border-bottom: 1px solid #e5e7eb;
 }
-.table tbody td {
+.table tbody td, .io-table tbody td{
   padding: 12px 14px;
   border-top: 1px solid #f3f4f6;
   vertical-align: middle;
 }
+.io-table tbody tr:nth-child(even){ background:#fcfcff; } /* leichter Zebra-Effekt */
 
-.table .qty { width: 120px; }
-.table .actions { width: 56px; text-align: right; }
+.table .qty, .io-table .qty{ width: 120px; }
+.table .actions, .io-table .actions{ width: 56px; text-align: right; }
+.io-table .qty .io-input{ width:100%; }
 
 /* Kleine Helfer */
 .muted { color: #6b7280; font-size: 12px; }
 .right { text-align: right; }
-.kbd {
+.kbd{
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  background: #111827;
-  color: #fff;
-  border-radius: 6px;
-  padding: 2px 6px;
-  font-size: 12px;
+  background: #111827; color: #fff; border-radius: 6px; padding: 2px 6px; font-size: 12px;
 }
 
 /* Footer-Toolbar */
-.toolbar {
-  margin-top: 16px;
-  display: flex;
-  gap: 10px;
-}
+.toolbar { margin-top: 16px; display: flex; gap: 10px; }
 
 /* Responsive */
 @media (max-width: 720px) {
   .grid { grid-template-columns: 1fr; }
-  .table .qty, .table .actions { width: auto; }
-}
-
-.io-btn{ 
-  display:inline-flex; align-items:center; gap:.4rem;
-  border:1px solid transparent; border-radius:.55rem; padding:.5rem .8rem;
-  font-weight:600; cursor:pointer; transition:background .15s, border-color .15s, color .15s;
-}
-.io-btn-primary{
-  background:#5b55ff; color:#fff; 
-}
-.io-btn-primary:hover{ background:#514cf5; }
-.io-btn-ghost{
-  background:transparent; color:#6b7280; border-color:#e5e7eb;
-}
-.io-btn-ghost:hover{ background:#f3f4f6; color:#111827; }
-.io-icon{ display:block; }
-@media (max-width: 640px){
+  .table .qty, .table .actions, .io-table .qty, .io-table .actions { width: auto; }
   .io-hide-sm{ display:none; }
 }
-
-.io-input-row{display:flex;align-items:center;gap:.75rem;margin:.35rem 0 .6rem}
-.io-input-row .io-input{flex:1}
-.io-input-row .io-btn{height:40px}
-
-/* Base styling for new .io-input */
-.io-input,
-.io-input[type="number"]{
-  width:100%;
-  height:40px;
-  padding:8px 12px;
-  border:1px solid #d1d5db;           /* gray-300 */
-  border-radius:10px;
-  background:#fff;
-  outline:none;
-  transition: box-shadow .15s ease, border-color .15s ease;
-  font: inherit;
-}
-.io-input:focus{
-  border-color:#6366f1;                /* indigo-500 */
-  box-shadow:0 0 0 4px rgba(99,102,241,.12);
-}
-.io-input::placeholder{ color:#9ca3af; }
-
-.io-label{display:block;font-weight:600;margin:8px 0 6px;color:#374151;font-size:.95rem}
-.io-hint{margin:.5rem 0 1rem;color:#6b7280;font-size:.95rem}
-
-/* Unify .io-btn so it doesn't fall back to OS default */
-.io-btn{
-  display:inline-flex;align-items:center;gap:.4rem;
-  -webkit-appearance:none;appearance:none;
-  border:1px solid transparent;
-  border-radius:10px;
-  padding:.5rem .9rem;
-  font-weight:600;
-  cursor:pointer;
-  transition:background .15s,border-color .15s,color .15s;
-  background:transparent;
-}
-.io-btn-primary{background:#5b4df2;color:#fff}
-.io-btn-ghost{background:transparent;color:#6b7280}
-.io-btn-ghost:hover{color:#ef4444}
-.io-icon{vertical-align:middle}
-.text-right{text-align:right}
-
-/* ---- Harmonisierung der Tabelle (.io-table) ---- */
-.io-table thead th{background:#f9fafb;font-weight:700;color:#6b7280}
-.io-table tbody td{vertical-align:middle}
-.io-table .qty{width:140px}
-.io-table .actions{width:72px;text-align:right}
-.io-table .qty .io-input{width:100%}
-.io-table tbody tr:nth-child(even){background:#fbfcff}
-
-/* ---- Remove-Button visuell klarer ---- */
-.remove-row.io-btn-ghost{border-color:#e5e7eb}
-.remove-row .io-icon{width:18px;height:18px;color:#6b7280}
-.remove-row:hover{background:#fef2f2;border-color:#fecaca;color:#b91c1c}
-.remove-row:hover .io-icon{color:#b91c1c}
-
-/* Kleine Tweaks */
-.io-hint{margin:.45rem 0 1rem}
